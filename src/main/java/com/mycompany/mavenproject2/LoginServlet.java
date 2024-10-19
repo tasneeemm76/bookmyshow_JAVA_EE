@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("location", rs.getString("location"));
 
                             // Redirect to a user dashboard or welcome page
-                            response.sendRedirect("display_events.jsp");
+                            response.sendRedirect("homePage.jsp");
                         } else {
                             // Invalid login
                             response.getWriter().println("Invalid username or password.");

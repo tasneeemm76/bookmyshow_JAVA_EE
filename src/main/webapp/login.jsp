@@ -35,14 +35,14 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #800000;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #000;
         }
         .error {
             color: red;

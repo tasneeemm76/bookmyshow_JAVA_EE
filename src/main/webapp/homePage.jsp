@@ -9,13 +9,13 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #000000;
+            background-color: #ffffff;
             color: white;
         }
 
         .navbar {
-        background: linear-gradient(90deg, #000000, #800000) ; /* Gradient for navbar */
-        padding: 15px 30px;
+        background: linear-gradient(45deg, #000000, #800000) ; /* Gradient for navbar */
+        padding: 15px 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -24,7 +24,7 @@
     .navbar a {
         color: white;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 15px;
         margin: 0 15px;
     }
 
@@ -43,7 +43,7 @@
         font-family: cursive;
         margin: 0;
         font-size: 3.5em;
-        color: #ffff; /* Gold text for added contrast */
+        color: #ffff; 
         text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
     }
 
@@ -52,31 +52,35 @@
             font-size: 2.5em;
         }
 
-        .event-container {
-            margin: 20px;
-            display: flex;
-            flex-wrap: wrap;
-        }
+     .event-container {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
 
-        .event-card {
-            background-color: white;
-            color: #000;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            width: 30%;
-        }
+.event-card {
+    background-color: white;
+    color: #000;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 30%;
+    border: 2px solid #800000; /* Add a border */
+    height: 350px; /* Increase the height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for a more professional look */
+}
 
-        .event-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+.event-card img {
+    width: 100%;
+    height: 200px; /* Increase the image height */
+    object-fit: cover;
+    border-radius: 8px;
+}
 
-        .event-card h2 {
-            color: #800000;
-        }
+.event-card h2 {
+    color: #800000;
+}
+
 
         .view-all-btn {
             display: block;
@@ -95,28 +99,32 @@
         .view-all-btn a:hover {
             background-color: #000000;
         }
+        
+        h2 {
+    color: #000000; /* Set the color of the headings to black */
+    margin-left: 30px;
+    text-align: left;
+}
+
+       
+
     </style>
 </head>
 <body>
     <!-- Navigation bar -->
     <div class="navbar">
         <a href="index.jsp">Home</a>
-        <a href="categories.jsp">Categories</a>
-        <a href="about.jsp">About</a>
+        <a href="offers.jsp">Special Offers</a>
+        <a href="recommendation.jsp">Recommendations</a>
     </div>
 
     <!-- Header -->
     <div class="header">
         <h1>Next Fest</h1>
     </div>
-<video autoplay muted loop>
-    <source src="file:///C:/path_to_video/banner.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-
     <div class="event-section">
         <!-- Fetch and display events for Party Events (Category 1) -->
-        <h2 style="text-align: left; margin-left: 20px;">Party Events</h2>
+        <h2 style="text-align: left; margin-left: 20px; ">Party Events</h2>
         <div class="event-container">
             <%
                 Connection conn = null;
@@ -158,7 +166,7 @@
 
         <!-- View All Button for Party Events -->
         <div class="view-all-btn">
-            <a href="display_events.jsp?category_id=1">View All Party Events</a>
+            <a href="display_events.jsp?category_id=1">View All Events</a>
         </div>
     </div>
 
@@ -202,7 +210,7 @@
 
         <!-- View All Button for Category 2 Events -->
         <div class="view-all-btn">
-            <a href="display_events.jsp?category_id=2">View All Category 2 Events</a>
+            <a href="display_events.jsp?category_id=2">View All Events</a>
         </div>
     </div>
 
@@ -247,7 +255,7 @@
 
         <!-- View All Button for Category 3 Events -->
         <div class="view-all-btn">
-            <a href="display_events.jsp?category_id=3">View All Category 3 Events</a>
+            <a href="display_events.jsp?category_id=3">View All Events</a>
         </div>
     </div>
 
@@ -292,7 +300,7 @@
 
         <!-- View All Button for Category 5 Events -->
         <div class="view-all-btn">
-            <a href="display_events.jsp?category_id=5">View All Category 5 Events</a>
+            <a href="display_events.jsp?category_id=5">View All Events</a>
         </div>
     </div>
 
@@ -336,50 +344,10 @@
 
         <!-- View All Button for Category 6 Events -->
         <div class="view-all-btn">
-            <a href="display_events.jsp?category_id=6">View All Category 6 Events</a>
+            <a href="display_events.jsp?category_id=6">View All Events</a>
         </div>
         
-    <div class="event-section">
-        <h2 style="text-align: left; margin-left: 20px;">Category 4 Events</h2>
-        <div class="event-container">
-            <%
-                try {
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/events_db", "root", "root");
-                    String sql = "SELECT * FROM events WHERE category_id = 4 LIMIT 3"; 
-                    stmt = conn.createStatement();
-                    ResultSet rs = stmt.executeQuery(sql);
-
-                    while (rs.next()) {
-                        String eventName = rs.getString("event_name");
-                        String description = rs.getString("description");
-                        Blob imageBlob = rs.getBlob("image");
-                        String base64Image = null;
-
-                        if (imageBlob != null) {
-                            byte[] imageBytes = imageBlob.getBytes(1, (int) imageBlob.length());
-                            base64Image = java.util.Base64.getEncoder().encodeToString(imageBytes);
-                        }
-            %>
-                <div class="event-card">
-                    <img src="data:image/jpeg;base64,<%= base64Image != null ? base64Image : "" %>" alt="Event Image">
-                    <h2><%= eventName %></h2>
-                    <p><%= description.length() > 100 ? description.substring(0, 100) + "..." : description %></p>
-                </div>
-            <%
-                    }
-                    rs.close();
-                    stmt.close();
-                    conn.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            %>
-        </div>
-
-        <!-- View All Button for Category 4 Events -->
-        <div class="view-all-btn">
-            <a href="display_events.jsp?category_id=4">View All Category 4 Events</a>
-        </div>
+  
     </div>
 
     </div>
